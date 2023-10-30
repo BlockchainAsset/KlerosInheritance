@@ -1,17 +1,19 @@
-## Foundry
+# Kleros Inheritance Contract
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+An inheritance contract in Solidity.
 
-Foundry consists of:
+## Features
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- Owner should be able to withdraw ETH.
+- If owner does not withdraw ETH from contract, heir can take control of the contract and designate a new heir after 1 month (30 days).
+- It should be possible for the owner to withdraw 0 ETH just to reset the one month counter.
 
-## Documentation
+## Improvements to be made
 
-https://book.getfoundry.sh/
+- Editing `heir` after contract is deployed.
+- Allowing ERC20 token transfer possible.
+- Making the wallet ERC721, etc compatible (`onERC721Received(...)`).
+- Flexible timelock other than 1 month which would be editable by the owner.
 
 ## Usage
 
@@ -33,34 +35,24 @@ $ forge test
 $ forge fmt
 ```
 
-### Gas Snapshots
+### Coverage
 
 ```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
+$ forge coverage
 ```
 
 ### Deploy
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
+#### Locally
 
 ```shell
-$ cast <subcommand>
+anvil
 ```
-
-### Help
 
 ```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+forge script script/KlerosInheritance.s.sol:KlerosInheritanceScript --fork-url http://localhost:8545 --broadcast
 ```
+
+## Note
+
+This is done as a take home task, and should not be used in production.
